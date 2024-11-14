@@ -1,6 +1,7 @@
 *_templ.go
 /tmp
 /static/output.css
+.envrc
 # Created by https://www.toptal.com/developers/gitignore/api/node,go
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,go
 
