@@ -1,4 +1,6 @@
-.PHONY: all templ_generate tailwindcss build
+include .envrc
+.PHONY: all templ_generate tailwindcss build status up down
+url="postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable"
 
 all: templ_generate tailwindcss build
 
@@ -10,3 +12,12 @@ tailwindcss:
 
 build:
 	@go build -o ./tmp/main ./cmd/web
+
+status:
+	@goose postgres ${url} status
+
+up:
+	@goose postgres ${url} up
+
+down:
+	@goose postgres ${url} down
