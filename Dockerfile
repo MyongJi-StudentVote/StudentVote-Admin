@@ -28,7 +28,7 @@ RUN go mod download
 COPY . .
 
 # Build Go binary
-RUN CGO_ENABLED=0 go build -o app ./cmd/web
+RUN go build -o app ./cmd/web
 
 # Stage 3: Final production image
 FROM gcr.io/distroless/base-debian11
