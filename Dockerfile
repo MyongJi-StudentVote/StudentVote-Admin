@@ -26,7 +26,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy application source code
-COPY . ./
+COPY . .
 
 # Build Go binary
 RUN CGO_ENABLED=0 go build -o app ./cmd/web
@@ -37,6 +37,8 @@ FROM gcr.io/distroless/base-debian11
 WORKDIR /app
 
 # Copy Go binary
+
+COPY --from=go-builder /app/templates ./
 COPY --from=go-builder /app/app ./
 
 # Copy TailwindCSS assets
