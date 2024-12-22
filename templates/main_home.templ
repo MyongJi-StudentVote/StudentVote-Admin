@@ -1,0 +1,89 @@
+package templates
+
+import "github.com/MyongJi-StudentVote/StudentVote-Admin/templates/components"
+
+templ MainHome(title, governance, email string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		@components.Header(title)
+		<body>
+			<div class="bg-gray-200 min-h-screen flex" x-data="{ activeMenu: 'home' }">
+				<div class="bg-white w-64 h-screen shadow-md flex flex-col">
+					<!-- Logo and Title -->
+					<div class="p-6 border-b border-gray-300">
+						<!--<img src="https://via.placeholder.com/50" alt="Logo" class="h-12 w-12 mb-2"/>-->
+						<h1 class="text-lg font-bold">명지대학교<br/>선거 관리 페이지</h1>
+					</div>
+					<!-- Navigation Menu -->
+					<nav class="flex-1 p-4">
+						<ul class="space-y-4">
+							<li>
+								<a href="#" class="flex items-center font-semibold hover:text-blue-500" @click.prevent="activeMenu='home'" :class="activeMenu === 'home' ? 'text-blue-500' : 'text-gray-700'">
+									<i class="fa-solid fa-house"></i>
+									<span class="ml-2">홈</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center hover:text-blue-500" @click.prevent="activeMenu='management'" :class="activeMenu === 'management' ? 'text-blue-500' : 'text-gray-700'">
+									<i class="fa-solid fa-gear"></i>
+									<span class="ml-2">선거 관리</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center hover:text-blue-500" @click.prevent="activeMenu='announcement'" :class="activeMenu === 'announcement' ? 'text-blue-500' : 'text-gray-700'">
+									<i class="fa-solid fa-bullhorn"></i>
+									<span class="ml-2">선거 공고</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center hover:text-blue-500" @click.prevent="activeMenu='info'" :class="activeMenu === 'info' ? 'text-blue-500' : 'text-gray-700'">
+									<i class="fa-solid fa-check-to-slot"></i>
+									<span class="ml-2">후보자 정보</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center hover:text-blue-500" @click.prevent="activeMenu='voterate'" :class="activeMenu === 'voterate' ? 'text-blue-500' : 'text-gray-700'">
+									<span class="fa-solid fa-pie-chart"></span>
+									<span class="ml-2">투표율</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center hover:text-blue-500" @click.prevent="activeMenu='result'" :class="activeMenu === 'result' ? 'text-blue-500' : 'text-gray-700'">
+									<span class="fa-solid fa-check"></span>
+									<span class="ml-2">개표 결과</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- Footer -->
+					<div class="p-4 border-t border-gray-300">
+						<ul class="space-y-4">
+							<li>
+								<a href="#" class="flex items-center text-gray-700 hover:text-blue-500">
+									<span class="fa-solid fa-user"></span>
+									<span class="ml-2">선관위 회원 관리</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex items-center text-gray-700 hover:text-blue-500">
+									<span class="fa-solid fa-right-from-bracket"></span>
+									<span class="ml-2">로그아웃</span>
+								</a>
+							</li>
+						</ul>
+						<!-- User Info -->
+						<div class="mt-4 flex items-center">
+							<div class="ml-3">
+								<p class="text-sm font-bold">{ governance }</p>
+								<p class="text-sm text-gray-500">{ email }</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flex-1 p-6">
+				<!-- Empty Content Area -->
+			</div>
+		</body>
+	</html>
+}

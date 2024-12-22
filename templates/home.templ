@@ -1,16 +1,55 @@
 package templates
 
-templ Home() {
+import "github.com/MyongJi-StudentVote/StudentVote-Admin/templates/components"
+
+templ Home(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
-		<head>
-			<meta charset="utf-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<title>HTML5 Boilerplate</title>
-			<link rel="stylesheet" href="static/output.css"/>
-		</head>
+		@components.Header(title)
 		<body>
-			<h1 class="text-blue-500">Page Title</h1>
+			<div class="flex justify-center items-center min-h-screen bg-gray-200">
+				<div class="flex w-3/4 bg-white shadow-md">
+					<!-- 왼쪽 회색 영역 -->
+					<div class="w-1/2 bg-gray-100"></div>
+					<!-- 오른쪽 로그인 영역 -->
+					<div class="w-1/2 p-28">
+						<h1 class="text-lg font-bold mb-6">명지대 선거관리 어드민 페이지</h1>
+						<h2 class="text-xl font-semibold mb-4">로그인</h2>
+						<form class="space-y-7" hx-post="/signin">
+							<div>
+								<label for="email" class="block text-sm font-medium">이메일</label>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+									placeholder="email@test.com"
+									required
+								/>
+							</div>
+							<div>
+								<label for="password" class="block text-sm font-medium">패스워드</label>
+								<input
+									type="password"
+									id="password"
+									name="password"
+									class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+									placeholder="패스워드"
+									required
+								/>
+							</div>
+							@components.SubmitButton("로그인")
+							@components.LinkButton("회원가입", "/signup")
+						</form>
+						<p class="mt-4 text-sm text-gray-600">
+							패스워드를 잊으셨나요?
+							<a href="#" class="text-blue-500 font-medium hover:underline">
+								관리자에게 요청하기
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
 		</body>
 	</html>
 }

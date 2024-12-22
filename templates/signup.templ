@@ -1,0 +1,84 @@
+package templates
+
+import "github.com/MyongJi-StudentVote/StudentVote-Admin/templates/components"
+
+templ Signup(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		@components.Header(title)
+		<body>
+			<div class="bg-gray-200 flex items-center justify-center min-h-screen" x-data="{ password: '', confirmPassword: '', isValid: false }" x-effect="isValid = (password === confirmPassword)">
+				<div id="box" class="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+					<h1 class="text-center text-2xl font-bold mb-6">회원가입</h1>
+					<form class="space-y-7" hx-post="/signup" hx-target="#box" hx-swap="innerHTML">
+						<div>
+							<label for="name" class="block text-sm font-medium">이름</label>
+							<input
+								type="text"
+								id="name"
+								name="name"
+								class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+								placeholder="홍길동"
+								required
+							/>
+						</div>
+						<div>
+							<label for="email" class="block text-sm font-medium">이메일</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+								placeholder="email@test.com"
+								required
+							/>
+						</div>
+						<div>
+							<label for="password" class="block text-sm font-medium">패스워드</label>
+							<input
+								type="password"
+								id="password"
+								name="password"
+								class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+								placeholder="패스워드"
+								x-model="password"
+								required
+							/>
+						</div>
+						<div>
+							<label for="password-confirm" class="block text-sm font-medium">패스워드 확인</label>
+							<label x-show="!isValid" for="password-confirm" class="text-sm text-red-500 font-medium">패스워드가 일치하지 않습니다</label>
+							<input
+								type="password"
+								id="password-confirm"
+								name="password-confirm"
+								class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+								placeholder="패스워드 확인"
+								x-model="confirmPassword"
+								:class="password === confirmPassword ? 'border-gray-300' : 'border-red-300'"
+							/>
+						</div>
+						<div class="mb-4">
+							<label for="unit" class="block text-sm font-medium text-gray-700">소속 단위</label>
+							<select
+								id="unit"
+								name="unit"
+								class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+							>
+								<option value="1">ICT 융합대학</option>
+								<option value="3">총학생회</option>
+							</select>
+						</div>
+						<button
+							type="submit"
+							:disabled="password !== confirmPassword"
+							class="w-full py-2 bg-black text-white rounded-md font-bold hover:bg-gray-800"
+						>
+							회원가입
+						</button>
+					</form>
+				</div>
+			</div>
+		</body>
+	</html>
+}

@@ -1,0 +1,12 @@
+package components
+
+templ LinkButton(text, link string) {
+	<button
+		type="button"
+		class="w-full py-2 bg-black text-white rounded-md font-bold hover:bg-gray-800"
+	>
+		<a class="w-full h-full" href={ templ.SafeURL(link) }>
+			{ text }
+		</a>
+	</button>
+}
