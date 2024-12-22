@@ -1,7 +1,6 @@
-# Use multi-stage build to optimize image size
 
 # Stage 1: Build TailwindCSS assets
-FROM oven/bun:latest AS tailwind-builder
+FROM oven/bun:1.0.2 AS tailwind-builder
 
 WORKDIR /app
 
@@ -21,7 +20,7 @@ FROM golang:1.22 AS go-builder
 
 WORKDIR /app
 
-# Install Templ and Go dependencies
+# Install Go dependencies
 COPY go.mod go.sum ./
 RUN go mod download
 
@@ -36,16 +35,15 @@ FROM gcr.io/distroless/base-debian11
 
 WORKDIR /app
 
-# Copy Go binary
-
-COPY --from=go-builder /app/templates ./
+# Copy Go binary and templates
 COPY --from=go-builder /app/app ./
+COPY --from=go-builder /app/templates ./templates
 
 # Copy TailwindCSS assets
 COPY --from=tailwind-builder /app/static ./static
 
-# Expose port
+# Expose default port
 EXPOSE 8080
 
-# Command to run the application
+# Run the application
 CMD ["./app"]
